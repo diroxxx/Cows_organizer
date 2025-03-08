@@ -1,5 +1,6 @@
 package com.example.cows.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -25,8 +26,7 @@ public class Owner extends Person {
     @Size(min = 2, max = 100)
     private String address;
 
-    @OneToMany
-    @JoinColumn(name = "owner_id")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cattle> listOfCattle = new ArrayList<Cattle>();
 
 }

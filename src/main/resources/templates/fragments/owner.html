@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Fragment tabeli w osobnym pliku -->
+<th:block th:fragment="tableOfOwners">
+  <tbody id="owners-list"> <!-- ✅ Teraz zwracamy tylko `tbody` -->
+  <tr th:each="owner : ${owners}">
+    <td th:text="${owner.firstName}"></td>
+    <td th:text="${owner.lastName}"></td>
+    <td th:text="${owner.email}"></td>
+    <td th:text="${owner.phoneNumber}"></td>
+    <td th:text="${owner.address}"></td>
+  </tr>
+  </tbody>
+</th:block>
+
+
+</body>
+</html>
