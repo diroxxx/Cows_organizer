@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<!-- Fragment tabeli w osobnym pliku -->
+
 <th:block th:fragment="tableOfOwners">
-  <tbody id="owners-list"> <!-- ✅ Teraz zwracamy tylko `tbody` -->
+  <tbody id="owners-list">
   <tr th:each="owner : ${owners}">
     <td th:text="${owner.firstName}"></td>
     <td th:text="${owner.lastName}"></td>

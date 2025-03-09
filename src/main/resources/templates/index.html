@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Cows</title>
-    <script src="https://unpkg.com/htmx.org@1.9.6"></script> <!-- ✅ Dodaj ręcznie -->
-
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+<!--    <link rel="stylesheet" href="../styles/index.css">-->
 
 </head>
-<body>
-<h1>List of Owners</h1>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Address</th>
-    </tr>
-    </thead>
-    <tbody id="owners-list" th:replace="~{fragments/owner :: tableOfOwners}">
-    <!-- Początkowa zawartość -->
-    </tbody>
-</table>
+<div class="w-full max-w-5xl bg-white shadow-lg rounded-lg p-6">
+    <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">List of Owners</h1>
 
-<button hx-get="/cowsOrganizer/updatedOwners" hx-target="#owners-list" hx-swap="outerHTML">Update Owners
+    <div class="overflow-x-auto">
+        <table class="w-full border border-gray-300 shadow-md rounded-lg">
+            <thead>
+            <tr class="bg-blue-500 text-white uppercase text-sm">
+                <th class="p-3">First Name</th>
+                <th class="p-3">Last Name</th>
+                <th class="p-3">Email</th>
+                <th class="p-3">Phone Number</th>
+                <th class="p-3">Address</th>
+            </tr>
+            </thead>
+            <tbody id="owners-list" th:replace="~{fragments/owner :: tableOfOwners}">
+            </tbody>
+        </table>
+    </div>
 
-</button>
+    <div class="flex justify-center mt-6">
+        <button hx-get="/cowsOrganizer/updatedOwners"
+                hx-target="#owners-list"
+                hx-swap="outerHTML"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
+            Update Owners
+        </button>
+    </div>
+</div>
 
 </body>
 </html>

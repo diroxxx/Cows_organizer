@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full text-center">
+    <h1 class="text-2xl font-bold text-blue-600">Welcome to the Dashboard!</h1>
+    <p class="mt-4">You are logged in.</p>
+    <p class="mt-4" th:text="${#authentication.name}"></p>
+    <form th:action="@{/logout}" method="post" class="mt-6">
+        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg">
+            Logout
+        </button>
+    </form>
+</div>
+</body>
+</html>
