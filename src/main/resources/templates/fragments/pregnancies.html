@@ -1,0 +1,23 @@
+<th:block th:fragment="history-cattle">
+    <h2 class="text-2xl font-bold text-gray-700">Historia zacieleń</h2>
+    <table class="w-full border-collapse border border-gray-300 shadow-lg rounded-lg mt-4">
+        <thead class="bg-gray-200">
+        <tr>
+            <th class="p-3">ID</th>
+            <th class="p-3">Krowa</th>
+            <th class="p-3">Data inseminacji</th>
+            <th class="p-3">Przewidywana data porodu</th>
+            <th class="p-3">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pregnancy : ${pregnancies}" class="border-b">
+            <td class="p-3" th:text="${pregnancy.id}"></td>
+            <td class="p-3" th:text="${pregnancy.cattle.identificationNumber}"></td>
+            <td class="p-3" th:text="${pregnancy.inseminationDate}"></td>
+            <td class="p-3" th:text="${pregnancy.expectedDueDate}"></td>
+            <td class="p-3 text-green-600 font-semibold" th:text="${pregnancy.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>

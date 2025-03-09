@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -36,6 +37,16 @@ public class OrganizerController {
         return "login";
     }
 
+    @GetMapping("/cattleInfo")
+    public String cattleInfo() {
+        return "/fragments/cattle :: cattle-panel";
+    }
+
+    @GetMapping("/pregnancies")
+    public String pregnanciesHistory() {
+        return "/fragments/pregnancies :: history-cattle";
+    }
+
     @GetMapping("/owner-panel")
     public String ownerPanel(Authentication authentication, HttpServletRequest request, Model model) {
 
@@ -49,5 +60,13 @@ public class OrganizerController {
 
         return "ownerPanel";
     }
+
+//    @PostMapping("/logout")
+//    public String logout() {
+//        return "login";
+//    }
+
+
+
 
 }
