@@ -22,7 +22,13 @@ public class SecurityConfig {
         http
 //                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/errors").permitAll().anyRequest().authenticated())
+                        .requestMatchers("/", "/login", "/errors").permitAll()
+                                .requestMatchers("/h2-console/**").permitAll()
+
+                                .anyRequest().authenticated()
+                        )
+                .csrf(csrf -> csrf.disable()) // 🔥 H2 Console wymaga wyłączenia CSRF
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // 🔥 Pozwala na wyświetlenie H2 w `<iframe>`
 
                 .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/owner-panel", true).permitAll())
 //
@@ -43,14 +49,14 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-//                .password("{noop}admin")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+////                .password("{noop}admin")
+//                .roles("USER")
+//                .build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
 }

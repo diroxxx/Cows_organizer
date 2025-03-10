@@ -1,23 +1,19 @@
 package com.example.cows.Controllers;
 
-import com.example.cows.Services.OwnerService;
-import jakarta.servlet.http.HttpServlet;
+import com.example.cows.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 //@RequestMapping("/cowsOrganizer")
 @AllArgsConstructor
 public class OrganizerController {
 
-    private final OwnerService ownerService;
+    private final UserService ownerService;
 
 
     @GetMapping("/list_Of_Owners")
@@ -66,7 +62,10 @@ public class OrganizerController {
 //        return "login";
 //    }
 
-
+    @GetMapping("/registration")
+    public String register() {
+        return "register";
+    }
 
 
 }
