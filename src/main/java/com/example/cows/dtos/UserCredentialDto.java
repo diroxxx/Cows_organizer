@@ -1,6 +1,5 @@
 package com.example.cows.dtos;
 
-import com.example.cows.models.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +10,11 @@ import java.util.Set;
 public class UserCredentialDto {
     private final String email;
     private final String password;
-    private final Set<String> roles;
+    private Set<String> roles = Set.of();
 
-    public UserCredentialDto(String email, String password, Set<String> roles) {
+    public UserCredentialDto(String email, String password) {
         this.email = email;
         this.password = password;
-        this.roles = roles;
     }
 
 

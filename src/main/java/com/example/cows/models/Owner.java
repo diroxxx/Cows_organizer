@@ -22,7 +22,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id")
 public class Owner extends UserPerson {
 
-
     @NotNull
     @Size(min = 2, max = 100)
     private String address;

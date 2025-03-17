@@ -22,9 +22,9 @@ public class SecurityConfig {
         http
 //                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/errors").permitAll()
+                        .requestMatchers("/", "/login","/register", "/errors").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
-
+                                .requestMatchers("/owner-panel").hasRole("OWNER")
                                 .anyRequest().authenticated()
                         )
                 .csrf(csrf -> csrf.disable()) // 🔥 H2 Console wymaga wyłączenia CSRF
@@ -48,15 +48,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-////                .password("{noop}admin")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }

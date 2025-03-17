@@ -1,6 +1,8 @@
 package com.example.cows.Services;
 
 import com.example.cows.dtos.UserCredentialDto;
+import com.example.cows.models.Owner;
+import com.example.cows.models.UserPerson;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,16 +20,22 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userService.findCredentialByEmail(username)
-                .map(this::createUserDetails)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
-    }
-    private UserDetails createUserDetails(UserCredentialDto credentials) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserPerson userPerson =  userService.findCredentialByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+
+        String role;
+        if (userPerson instanceof Owner) {
+            role = "OWNER";
+        } else {
+            role = "VET";
+        }
+
+
         return User.builder()
-                .username(credentials.getEmail())
-                .password(credentials.getPassword())
-                .roles(credentials.getRoles().toArray(String[]::new))
+                .username(userPerson.getEmail())
+                .password(userPerson.getPassword())
+                .roles(role)
                 .build();
     }
 }

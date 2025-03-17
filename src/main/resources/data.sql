@@ -28,12 +28,12 @@ INSERT INTO owner (id, address)
 VALUES (1, '123 Farm Street');
 
 
-INSERT INTO
-    user_role (name)
-VALUES
-    ('USER');
+-- INSERT INTO
+--     user_role (name)
+-- VALUES
+--     ('USER');
 
-INSERT INTO
-    user_roles (user_id, role_id)
-VALUES
-    (1, 1);
+-- INSERT INTO
+--     user_roles (user_id, role_id)
+-- VALUES
+--     (1, 1);

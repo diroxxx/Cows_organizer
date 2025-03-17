@@ -9,11 +9,12 @@ import java.util.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserPerson {
+public abstract class UserPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,17 +44,10 @@ public class UserPerson {
     @Size(min = 8, max = 30, message = "Length of password must be between 8 nad 30")
     private String password;
 
+
+
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    private List<Role> roles = new ArrayList<>();
-
-    @ManyToMany(fetch = FetchType.EAGER) // Pobieramy role od razu
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<UserRole> roles = new HashSet<>();
-
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
