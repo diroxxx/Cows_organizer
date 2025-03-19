@@ -2,10 +2,12 @@ package com.example.cows.dtos;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 public class OwnerRegistrationDto {
     @NotBlank(message = "First name cannot be blank")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
@@ -19,10 +21,6 @@ public class OwnerRegistrationDto {
     @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
-    @NotBlank(message = "Username cannot be empty")
-    @Size(min = 3, max = 30, message = "Username must be between 3 and 30 characters")
-    private String username;
-
     @NotBlank(message = "Email cannot be empty")
     @Email(message = "Invalid email format")
     private String email;
@@ -33,7 +31,7 @@ public class OwnerRegistrationDto {
     private String phoneNumber;
 
     @NotBlank(message = "Password cannot be blank")
-    @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters")
+//    @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters")
     private String password;
 
     @NotBlank(message = "Address cannot be empty")

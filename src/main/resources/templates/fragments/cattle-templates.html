@@ -1,0 +1,94 @@
+<tr th:fragment="edit-form" th:object="${cattle}" th:id="'cow-'+${cattle.id}">
+    <td class="p-3" th:text="${cattle.id}"></td>
+    <td class="p-3">
+        <input type="number" th:field="*{identificationNumber}" class="w-full p-2 border rounded-lg">
+    </td>
+    <td class="p-3">
+        <select th:field="*{gender}" class="w-full p-2 border rounded-lg">
+            <option value="female">Samica</option>
+            <option value="male">Samiec</option>
+        </select>
+    </td>
+    <td class="p-3">
+        <input type="text" th:field="*{breed}" class="w-full p-2 border rounded-lg">
+    </td>
+    <td class="p-3">
+        <input type="number" th:field="*{weight}" class="w-full p-2 border rounded-lg">
+    </td>
+    <td class="p-3">
+        <input type="text" th:field="*{status}" class="w-full p-2 border rounded-lg">
+    </td>
+    <td class="p-3">
+        <button class="text-green-500 hover:text-green-700"
+                hx-post="@{/cattles/{id}/update(id=${cattle.id})}"
+                hx-target="#cow-"
+                hx-swap="outerHTML"
+                hx-include="closest tr">
+            Save
+        </button>
+        <button class="text-gray-500 hover:text-gray-700"
+                hx-get="@{/cattles}"
+                hx-target="#cow-"
+                hx-swap="outerHTML">
+            Cancel
+        </button>
+    </td>
+</tr>
+
+
+<!--<tr th:fragment="cattle-row" th:object="${cattle}" th:id="'cow-'+${cattle.id}">-->
+<!--    <td class="p-3" th:text="${cattle.id}"></td>-->
+<!--    <td class="p-3" th:text="${cattle.identificationNumber}"></td>-->
+<!--    <td class="p-3" th:text="${cattle.gender}"></td>-->
+<!--    <td class="p-3" th:text="${cattle.breed}"></td>-->
+<!--    <td class="p-3" th:text="${cattle.weight}"></td>-->
+<!--    <td class="p-3" th:text="${cattle.status}"></td>-->
+<!--    <td class="p-3">-->
+<!--        <button class="text-blue-500 hover:text-blue-700"-->
+<!--                hx-get="@{/cattles/{id}/edit(id=${cattle.id})}"-->
+<!--                hx-target="#cow-"+${cattle.id}-->
+<!--                hx-swap="outerHTML">-->
+<!--            Edit-->
+<!--        </button>-->
+<!--    </td>-->
+<!--</tr>-->
+
+
+<th:block th:fragment="editRow">
+    <tr th:id="|cow-${cattle.id}|" class="border-b">
+        <td class="p-3" th:text="${cattle.id}"></td>
+        <td class="p-3">
+            <input type="text" th:value="${cattle.identificationNumber}" name="identificationNumber" class="border p-2 rounded">
+        </td>
+        <td class="p-3">
+            <select name="gender" class="border p-2 rounded">
+                <option value="female" th:selected="${cattle.gender == 'female'}">Female</option>
+                <option value="male" th:selected="${cattle.gender == 'male'}">Male</option>
+            </select>
+        </td>
+        <td class="p-3">
+            <input type="text" th:value="${cattle.breed}" name="breed" class="border p-2 rounded">
+        </td>
+        <td class="p-3">
+            <input type="number" th:value="${cattle.weight}" name="weight" class="border p-2 rounded">
+        </td>
+        <td class="p-3">
+            <input type="text" th:value="${cattle.status}" name="status" class="border p-2 rounded">
+        </td>
+        <td class="p-3">
+            <button class="text-green-500 hover:text-green-700"
+                    hx-put="@{/cattles/{id}/update(id=${cattle.id})}"
+                    hx-include="closest tr"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML">
+                Save
+            </button>
+            <button class="text-red-500 hover:text-red-700"
+                    hx-get="@{/cattles/{id}(id=${cattle.id})}"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML">
+                Cancel
+            </button>
+        </td>
+    </tr>
+</th:block>

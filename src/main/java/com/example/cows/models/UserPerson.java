@@ -3,18 +3,16 @@ package com.example.cows.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.*;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class UserPerson {
+public  class UserPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,23 +39,19 @@ public abstract class UserPerson {
     private String phoneNumber;
 
     @NotBlank(message = "password cannot be blank ")
-    @Size(min = 8, max = 30, message = "Length of password must be between 8 nad 30")
+//    @Size(min = 8, max = 30, message = "Length of password must be between 8 nad 30")
     private String password;
 
 
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    private List<Role> roles = new ArrayList<>();
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles.stream()
-//                .map(role -> (GrantedAuthority) () -> "ROLE_" + role.);
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return this.email;
-//    }
-
+    @Override
+    public String toString() {
+        return "UserPerson{" +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

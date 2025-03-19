@@ -27,7 +27,9 @@
                 Login
             </button>
         </div>
-
+        <div class="flex items-center justify-between">
+            <a class="text-blue-500 hover:text-blue-800" th:href="@{/register}">Register</a>
+        </div>
         <div th:if="${param.error}" class="text-red-500 text-center">
             Invalid username or password.
         </div>

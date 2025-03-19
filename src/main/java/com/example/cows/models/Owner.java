@@ -1,9 +1,6 @@
 package com.example.cows.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -29,4 +26,9 @@ public class Owner extends UserPerson {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cattle> listOfCattle = new ArrayList<Cattle>();
 
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

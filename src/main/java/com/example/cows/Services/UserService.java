@@ -2,7 +2,9 @@ package com.example.cows.Services;
 
 import com.example.cows.Repositories.OwnerRepository;
 import com.example.cows.Repositories.UserRepository;
+import com.example.cows.dtos.OwnerRegistrationDto;
 import com.example.cows.dtos.UserCredentialDto;
+import com.example.cows.mappers.OwnerMapper;
 import com.example.cows.models.Owner;
 import com.example.cows.models.UserPerson;
 import jakarta.transaction.Transactional;
@@ -19,13 +21,14 @@ import java.util.Optional;
 public class UserService {
     private  final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-    private OwnerRepository ownerRepository;
+    private final OwnerRepository ownerRepository;
+    private final OwnerMapper ownerMapper;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, OwnerRepository ownerRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, OwnerRepository ownerRepository, OwnerMapper ownerMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.ownerRepository = ownerRepository;
+        this.ownerMapper = ownerMapper;
     }
 
     public List<UserPerson> findAll() {
@@ -33,33 +36,24 @@ public class UserService {
     }
     public Optional<UserPerson> findCredentialByEmail(String email) {
         return userRepository.findByEmail(email);
-//                .map(UserCredentialsDtoMapper::userCredentialsDtoMapper);
     }
 
-    @Transactional
-    public void registerOwner(String firstName, String lastName, LocalDate dateOfBirth,
-                               String email, String phoneNumber,
-                              String password, String address) {
+    public Optional<Owner> findOwnerByEmail(String email) {
+        return ownerRepository.findByEmail(email);
+    }
 
-        Optional<UserPerson> existingUser = userRepository.findByEmail(email);
-        System.out.println(existingUser.isPresent());
+
+    @Transactional
+    public void registerOwner(OwnerRegistrationDto ownerDto) {
+        Optional<Owner> existingUser = ownerRepository.findByEmail(ownerDto.getEmail());
 
         if (existingUser.isPresent()) {
-            logger.error("User with email {} already exists!", email);
             throw new RuntimeException("User with this email already exists!");
         }
 
-        Owner owner = new Owner();
-        owner.setFirstName(firstName);
-        owner.setLastName(lastName);
-        owner.setDateOfBirth(dateOfBirth);
-        owner.setEmail(email);
-        owner.setPhoneNumber(phoneNumber);
-        owner.setPassword(passwordEncoder.encode(password));
-        owner.setAddress(address);
-//        System.out.println("asdasdasdasd");
+        Owner owner = ownerMapper.toOwner(ownerDto);
+        owner.setPassword(passwordEncoder.encode(ownerDto.getPassword()));
 
-
-        userRepository.saveAndFlush(owner);
+        ownerRepository.save(owner);
     }
 }

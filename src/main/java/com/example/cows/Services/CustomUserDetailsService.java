@@ -21,6 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        if (email == null || email.isBlank()) {
+            throw new UsernameNotFoundException("Invalid email provided.");
+        }
         UserPerson userPerson =  userService.findCredentialByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
 
@@ -30,7 +33,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             role = "VET";
         }
-
 
         return User.builder()
                 .username(userPerson.getEmail())

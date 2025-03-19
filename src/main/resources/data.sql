@@ -1,39 +1,19 @@
--- INSERT INTO OWNER (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, EMAIL, PHONE_NUMBER, PASSWORD, ADDRESS)
--- VALUES ('John', 'Doe', DATE '1985-03-15', 'john.doe@example.com', '123456789', 'securePass123', '123 Farm Street, Texas');
---
--- INSERT INTO OWNER (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, EMAIL, PHONE_NUMBER, PASSWORD, ADDRESS)
--- VALUES ('Anna', 'Smith', DATE '1990-07-10', 'anna.smith@example.com', '987654321', 'farmLover321', '456 Green Road, California');
 
--- INSERT INTO OWNER (first_name, last_name, date_of_birth, email, phone_number, password, address)
--- VALUES ('John', 'Doe', DATE '1985-03-15', 'john.doe@example.com', '123456789', 'securePass123', '123 Farm Street, Texas');
---
--- INSERT INTO OWNER (first_name, last_name, date_of_birth, email, phone_number, password, address)
--- VALUES ('Anna', 'Smith', DATE '1990-07-10', 'anna.smith@example.com', '987654321', 'farmLover321', '456 Green Road, California');
---
--- INSERT INTO Owner (first_name, last_name, date_of_birth, email, phone_number, password, address)
--- VALUES ('Anna', 'Smith', '1990-07-10', 'anna.smith@example.com', '987654321', 'farmLover321', '456 Green Road, California');
---
--- INSERT INTO Owner (first_name, last_name, date_of_birth, email, phone_number, password, address)
--- VALUES ('Michael', 'Johnson', '1978-02-25', 'michael.johnson@example.com', '567123890', 'cattleKing99', '789 Cattle Lane, Florida');
---
--- INSERT INTO Owner (first_name, last_name, date_of_birth, email, phone_number, password, address)
--- VALUES ('Emma', 'Williams', '1995-06-30', 'emma.williams@example.com', '321987654', 'ranchQueen2024', '321 Ranch Road, Nebraska');
---
-INSERT INTO User_Person (first_name, last_name, date_of_birth, email, phone_number, password)
-VALUES ('Robert', 'Brown', '1982-09-12', 'robert.brown@example.com', '654321987', '{noop}livestockMaster55');
-
-
+INSERT INTO user_person (first_name, last_name, email, password, phone_number, date_of_birth)
+VALUES ( 'John', 'Doe', 'john.doe@example.com', 'sa', '123456789', '1990-05-10');
 
 INSERT INTO owner (id, address)
 VALUES (1, '123 Farm Street');
 
 
--- INSERT INTO
---     user_role (name)
--- VALUES
---     ('USER');
+INSERT INTO cattle (identification_number, gender, breed, weight, date_of_birth, status, is_calf, owner_id, mother_id)
+VALUES (1001, 'female', 'Holstein', 650.5, '2020-06-12', 'lactating', TRUE, 1, NULL);
 
--- INSERT INTO
---     user_roles (user_id, role_id)
--- VALUES
---     (1, 1);
+INSERT INTO cattle (identification_number, gender, breed, weight, date_of_birth, status, is_calf, owner_id, mother_id)
+VALUES (1002, 'male', 'Angus', 720.0, '2021-08-15', 'breeding bull', FALSE, 1, NULL);
+
+INSERT INTO cattle (identification_number, gender, breed, weight, date_of_birth, status, is_calf, owner_id, mother_id)
+VALUES (1003, 'female', 'Jersey', 480.0, '2023-01-05', 'calf', TRUE, 1, null);
+
+INSERT INTO cattle (identification_number, gender, breed, weight, date_of_birth, status, is_calf, owner_id, mother_id)
+VALUES (1004, 'female', 'Simmental', 500.0, '2022-09-30', 'heifer', TRUE, 1,null);

@@ -55,7 +55,7 @@ public class Cattle {
 
     @ManyToOne()
     @JoinColumn(name = "mother_id")
+    @Nullable
     private Cattle mother;
-
 
 }
