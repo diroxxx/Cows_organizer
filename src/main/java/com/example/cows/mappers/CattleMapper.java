@@ -10,6 +10,5 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CattleMapper {
 
-
     Cattle toCattle(CattleRegisterDto cattleRegisterDto);
 }

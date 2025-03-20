@@ -29,7 +29,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                         )
                 .csrf(csrf -> csrf.disable()) // 🔥 H2 Console wymaga wyłączenia CSRF
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // 🔥 Pozwala na wyświetlenie H2 w `<iframe>`
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
 
                 .formLogin(form -> form
                         .loginPage("/login")

@@ -3,10 +3,7 @@ package com.example.cows.models;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -17,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Cattle {
 
     @Id
@@ -46,7 +44,7 @@ public class Cattle {
     private String status;
 
     @NotNull
-    private Boolean isCalf;
+    private boolean isCalf;
 
     @NotNull
     @ManyToOne()

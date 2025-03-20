@@ -26,38 +26,12 @@ import java.util.Optional;
 @AllArgsConstructor
 public class OrganizerController {
 
-    private final UserService ownerService;
     private final UserService userService;
-    private final CattleService cattleService;
 
-
-    @GetMapping("/list_Of_Owners")
-    public String listOfOwners(Model model) {
-        model.addAttribute("owners", ownerService.findAll());
-        return "index";
-    }
 
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/cattlesInfo")
-    public String cattleInfo(Model model, Authentication authentication) {
-        String email = authentication.getName();
-
-        Owner owner = userService.findOwnerByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Nie znaleziono właściciela!"));
-
-        Optional<List<Cattle>> ownerCattle = cattleService.getCattlesByOwnerId(owner.getId());
-
-        model.addAttribute("ownerCattles", ownerCattle.orElse(Collections.emptyList()));
-        if (ownerCattle.isEmpty()) {
-            model.addAttribute("emptyListOfCattle", "There is no cattle to see");
-        }
-
-        model.addAttribute("cattleDto", new CattleRegisterDto());
-        return "/fragments/cattle";
     }
 
     @GetMapping("/pregnancies")
@@ -69,11 +43,6 @@ public class OrganizerController {
     public String ownerPanel(Authentication authentication, HttpServletRequest request, Model model) {
         return "ownerPanel";
     }
-
-//    @PostMapping("/logout")
-//    public String logout() {
-//        return "login";
-//    }
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -87,7 +56,6 @@ public class OrganizerController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-
         try {
             userService.registerOwner(ownerDto);
 
@@ -99,11 +67,7 @@ public class OrganizerController {
     }
 
 
-    @GetMapping("/addCattle")
-    public String addCattle(Model model) {
-        model.addAttribute("cattleDto", new CattleRegisterDto());
-        return "/fragments/cattle :: cattle-form";
-    }
+
 
 //    public String addCattle(CattleRegisterDto cattleRegisterDto) {
 //
